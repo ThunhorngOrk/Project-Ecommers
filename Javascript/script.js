@@ -1,5 +1,5 @@
 let product = []
-const cardItem = []
+let cardItem = []
 
 // Display product
 const Display = (prd) => {
@@ -19,9 +19,8 @@ const Display = (prd) => {
 
                         <h6 class="text-primary mb-2">$${item.price}</h6>
 
-                        <button class="btn btn-primary mt-auto w-100">
-                            <i class="bi bi-cart-plus"></i>
-                            Add To Cart
+                        <button onclick='addToCart(${item.id})' class="btn btn-primary mt-auto w-100" >
+                            <i class="bi bi-cart-plus"></i> Add To Cart
                         </button>
                     </div>
                 </div>
@@ -35,6 +34,7 @@ const Display = (prd) => {
             </h1>
         `;
     }
+    Update();
 }
 
 // Fetch data
@@ -48,18 +48,44 @@ fetch("https://thunhorngork.github.io/Data/")
     .catch(err => console.log(err))
 
 // Search product
-document.getElementById("search").addEventListener("input",  function(e) {
+document.getElementById("search").addEventListener("input", function (e) {
     let searchValue = e.target.value.toLowerCase()
     console.log(searchValue);
 
-    let found = product.filter(pro=>{
+    let found = product.filter(pro => {
         return pro.name.toLowerCase().includes(searchValue)
     })
     document.getElementById("show-product").innerHTML = ``;
     if (found.length > 0) {
         Display(found);
         document.getElementById("txt-search").innerHTML = ``;
-    }else {
+    } else {
         document.getElementById("txt-search").innerHTML = `Product is Not Found!`
     }
 })
+
+// fc add to cart
+const addToCart = (productId) => {
+    let prd = product.find(pro => pro.id === productId)
+    let itemcart = cardItem.find(i => i.id === productId)
+    if (itemcart) {
+        itemcart.quantity += 1;
+    } else {
+        cardItem.push({ ...prd, quantity: 1 })
+    }
+    Swal.fire({
+        title: `${prd.name} added to cart!`,
+        text: "Please check your cart",
+        icon: "success"
+    });
+    Update();
+}
+
+const Update = () => {
+    let cartCount = document.getElementById("cart_count")
+    let tocart = document.getElementById("cart-items")
+
+    let total = cardItem.reduce((sum, item) => sum + item.quantity, 0);
+
+    cartCount.innerHTML = total;
+}
