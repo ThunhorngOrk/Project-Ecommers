@@ -47,7 +47,8 @@
                     </ul>
                     <form class="d-flex position-relative mt-3 gap-3 mt-lg-0 align-content-center align-items-center"
                         role="search">
-                        <input id="search" class="form-control me-2 " type="search" placeholder="Search" aria-label="Search" />
+                        <input id="search" class="form-control me-2 " type="search" placeholder="Search"
+                            aria-label="Search" />
                         <i style="cursor: pointer" class="bi bi-cart-dash-fill text-black fs-4"
                             data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
                             aria-controls="offcanvasScrolling"></i>
@@ -61,40 +62,46 @@
     <!-- cart-ocanvas -->
 
     <div class="offcanvas offcanvas-end" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
-        id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Cart-Items</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <!-- cart item -->
-             <div id="card-items">
-                <!--items-->
-                <div class="card-item">
-                    <img src="" alt="">
-                    <div class="card-item-info">
-                        <h6>Product Name</h6>
-                        <p>$100</p>
+        id="offcanvasScrolling">
 
-                        <div class="card-action">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">Cart-Items</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+
+        <div class="offcanvas-body">
+
+            <!-- Cart Items -->
+            <div id="cart-items">
+
+                <div class="cart-item">
+                    <img src="https://i.pinimg.com/1200x/ae/59/5b/ae595b88aea47a98a8a6f9e7231e9d35.jpg" alt="">
+
+                    <div class="cart-info">
+                        <h6>Asus ROG Strix G18</h6>
+                        <p>$1,299.99</p>
+
+                        <div class="cart-actions">
                             <button>-</button>
                             <span>1</span>
                             <button>+</button>
                         </div>
                     </div>
-                    <i class=" bi bi-trash remove-btn"></i>
+
+                    <i class="bi bi-trash remove-btn"></i>
                 </div>
 
-             </div>
+            </div>
 
-             <!-- footer price -->
-              <div class="card-sumary" class="card-footer">
-                <div class=" d-flex justify-content-between fw-bold">
+            <!-- Footer -->
+            <div class="card-summary cart-footer">
+                <div class="d-flex justify-content-between fw-bold">
                     <span>Total:</span>
-                    <span>100$</span>
+                    <span>$1,299.99</span>
                 </div>
-                <button class=" btn btn-dark w-100 mt-3">Checkout</button>
-              </div>
+                <button class="btn btn-dark w-100 mt-3">Checkout</button>
+            </div>
+
         </div>
     </div>
 
@@ -210,15 +217,15 @@
     <!-- menu page -->
     <div class="menu container-fluid p-2 px-3 mt-3">
         <h2 class=" mb-4"> Computer Menu</h2>
-         <h1 id="txt-search" class="text-center text-danger-emphasis fw-bold"></h1>
-         <div id="show-product" class="row g-4">
+        <h1 id="txt-search" class="text-center text-danger-emphasis fw-bold"></h1>
+        <div id="show-product" class="row g-4">
 
-           
-            
-         </div>
+
+
+        </div>
 
     </div>
-    
+
     <!-- app content -->
     <div class="app-section container py-5 text-center">
 
