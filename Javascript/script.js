@@ -86,6 +86,73 @@ const Update = () => {
     let tocart = document.getElementById("cart-items")
 
     let total = cardItem.reduce((sum, item) => sum + item.quantity, 0);
+    cartCount.innerHTML = total;
 
     cartCount.innerHTML = total;
+
+    let show = ``;
+    let showitem = ``;
+    if (cardItem.length === 0) {
+        tocart.innerHTML = `<h3 class="text-center">Your cart is empty.</h3>`;
+        show = `<div class="card-footer">
+                    <div class="d-flex justify-content-between fw-bold">
+                        <span>Total Payment:</span>
+                        <span>$0</span>
+                    </div>
+                    <button class="btn btn-dark w-100 mt-3">Checkout</button>
+                </div>`;
+        document.getElementById("card-summary").innerHTML = show;
+    } else {
+        cardItem.forEach(item => {
+            showitem += `<div class="cart-item">
+                    <img src="${item.image}" alt="">
+
+                    <div class="cart-info">
+                        <h6>${item.name}</h6>
+                        <p>$${item.price.toFixed(2)}</p>
+
+                        <div class="cart-actions">
+    <button onclick="UpdateQTY(${item.id}, -1)">-</button>
+    <span>${item.quantity}</span>
+    <button onclick="UpdateQTY(${item.id}, 1)">+</button>
+</div>
+                    </div>
+                    <i class="bi bi-trash remove-btn" onclick="Removecart(${item.id})"></i>
+                </div>`
+            tocart.innerHTML = showitem
+        })
+        let totalpayment = cardItem.reduce(
+            (sum, item) => sum + item.price * item.quantity,
+            0
+        );
+
+        show = `<div class="card-footer">
+                    <div class="d-flex justify-content-between fw-bold">
+                        <span>Total Payment:</span>
+                        <span>$${totalpayment}</span>
+                    </div>
+                    <button class="btn btn-dark w-100 mt-3">Checkout</button>
+                </div>`
+        document.getElementById("card-summary").innerHTML = show;
+    }
+
 }
+
+const Removecart = (productId) => {
+    cardItem = cardItem.filter(i => i.id !== productId)
+    Update();
+}
+
+const UpdateQTY = (productId, qtycount) => {
+    const qtyData = cardItem.find(i => i.id === productId);
+
+    if (qtyData) {
+        qtyData.quantity += qtycount;
+
+        if (qtyData.quantity < 1) {
+            Removecart(productId);
+            return;
+        }
+    }
+    Update();
+};
