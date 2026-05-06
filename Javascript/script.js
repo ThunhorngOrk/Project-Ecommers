@@ -99,7 +99,7 @@ const Update = () => {
                         <span>Total Payment:</span>
                         <span>$0</span>
                     </div>
-                    <button class="btn btn-dark w-100 mt-3">Checkout</button>
+                    <button onclick="Checkout()" class="btn btn-dark w-100 mt-3">Checkout</button>
                 </div>`;
         document.getElementById("card-summary").innerHTML = show;
     } else {
@@ -131,7 +131,7 @@ const Update = () => {
                         <span>Total Payment:</span>
                         <span>$${totalpayment}</span>
                     </div>
-                    <button class="btn btn-dark w-100 mt-3">Checkout</button>
+                    <button onclick="Checkout()" class="btn btn-dark w-100 mt-3">Checkout</button>
                 </div>`
         document.getElementById("card-summary").innerHTML = show;
     }
@@ -155,4 +155,22 @@ const UpdateQTY = (productId, qtycount) => {
         }
     }
     Update();
-};
+}
+
+const Checkout = () => {
+    if (cardItem.length === 0) {
+        Swal.fire({
+            icon: "error",
+            title: "Your cart is empty",
+            text: "You can't Checkout",
+        });
+    } else {
+        cardItem = [];
+        Update();
+        Swal.fire({
+            icon: "success",
+            title: "Thank You For Order",
+            dragger: true
+        });
+    }
+}
